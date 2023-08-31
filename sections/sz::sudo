@@ -1,0 +1,28 @@
+# vim: ft=zsh fdm=marker foldlevel=0 sw=2 ts=2 sts=2 et
+
+# ------------------------------------------------------------------------------
+# Configuration
+# ------------------------------------------------------------------------------
+
+SPACESHIP_SUDO_SHOW="${SPACESHIP_SUDO_SHOW=true}"
+SPACESHIP_SUDO_PREFIX="${SPACESHIP_SUDO_PREFIX="has "}"
+SPACESHIP_SUDO_SUFFIX="${SPACESHIP_SUDO_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
+SPACESHIP_SUDO_COLOR="${SPACESHIP_SUDO_COLOR="cyan"}"
+
+# ------------------------------------------------------------------------------
+# Section
+# ------------------------------------------------------------------------------
+
+sz::sudo() {
+  [[ $SPACESHIP_SUDO_SHOW == false ]] && return
+
+  if sudo -n true 2> /dev/null; then
+    sz::section \
+      "$SPACESHIP_SUDO_COLOR" \
+      "sudo" \
+      "$SPACESHIP_SUDO_PREFIX" \
+      "$SPACESHIP_SUDO_SUFFIX"
+  fi
+}
+
+sz::sudo "$@"
